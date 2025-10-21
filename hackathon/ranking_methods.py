@@ -69,11 +69,3 @@ def rank_asos_predictions_with_model(prediction_dir: Path, model_path="ranking_m
     if return_dataframe:
         return df
     return df.index.tolist()
-
-
-#TODO: delete only for test
-
-if __name__ == "__main__":
-    prediction_dir = "/home/janina/PycharmProjects/boltz-hackathon-template-dsc/hackathon_data/intermediate_files/asos_public/predictions/boltz_results_1PZP_ALLOSTERIC_FTA_config_0/predictions/1PZP_ALLOSTERIC_FTA_config_0"
-    ranked_model_ids = rank_asos_predictions_with_model(prediction_dir, model_path="ranking_model.pkl")
-    print(f"\nRanked model IDs (best to worst): {ranked_model_ids}")
