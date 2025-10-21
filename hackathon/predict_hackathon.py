@@ -7,6 +7,7 @@ import subprocess
 from collections.abc import Iterable
 from pathlib import Path
 from typing import Any, List, Optional
+from ranking_methods import rank_asos_predictions_with_model
 
 import yaml
 from hackathon_api import Datapoint, Protein, SmallMolecule
@@ -115,8 +116,24 @@ def post_process_protein_ligand(datapoint: Datapoint, input_dicts: List[dict[str
     # Collect all PDBs from all configurations
     all_pdbs = []
     for prediction_dir in prediction_dirs:
-        config_pdbs = sorted(prediction_dir.glob(f"{datapoint.datapoint_id}_config_*_model_*.pdb"))
-        all_pdbs.extend(config_pdbs)
+        config_pdbs = list(prediction_dir.glob(f"{datapoint.datapoint_id}_config_*_model_*.pdb"))
+
+        # Rank models using trained model
+        ranked_model_ids = rank_asos_predictions_with_model(prediction_dir," ranking_model.pkl", return_dataframe=False)
+
+        # Create a mapping {model_id: pdb_path}
+        pdb_map = {}
+        for pdb_path in config_pdbs:
+            model_str = pdb_path.stem.split("_model_")[-1]
+            model_id = int(model_str)
+            pdb_map[model_id] = pdb_path
+
+        # Reorder according to ranking
+        ranked_pdbs = [pdb_map[mid] for mid in ranked_model_ids if mid in pdb_map]
+
+        # Add to collection
+        all_pdbs.extend(ranked_pdbs)
+
     
     # Sort all PDBs and return their paths
     all_pdbs = sorted(all_pdbs)
