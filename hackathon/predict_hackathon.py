@@ -114,8 +114,12 @@ def post_process_protein_ligand(datapoint: Datapoint, input_dicts: List[dict[str
     """
     # Collect all PDBs from all configurations
     all_pdbs = []
+    all_json = []
     for prediction_dir in prediction_dirs:
         config_pdbs = sorted(prediction_dir.glob(f"{datapoint.datapoint_id}_config_*_model_*.pdb"))
+        config_json = sorted(prediction_dir.glob(f"{datapoint.datapoint_id}_config_*_model_*.json"))
+        print(f"JSON!!! {config_json}" )
+        all_json.extend(config_json)
         all_pdbs.extend(config_pdbs)
     
     # Sort all PDBs and return their paths
