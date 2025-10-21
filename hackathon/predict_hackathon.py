@@ -119,7 +119,7 @@ def post_process_protein_ligand(datapoint: Datapoint, input_dicts: List[dict[str
         config_pdbs = list(prediction_dir.glob(f"{datapoint.datapoint_id}_config_*_model_*.pdb"))
 
         # Rank models using trained model
-        ranked_model_ids = rank_asos_predictions_with_model(prediction_dir," ranking_model.pkl", return_dataframe=False)
+        ranked_model_ids = rank_asos_predictions_with_model(prediction_dir, "ranking_model.pkl", return_dataframe=False)
 
         # Create a mapping {model_id: pdb_path}
         pdb_map = {}
