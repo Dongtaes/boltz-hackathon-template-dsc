@@ -342,7 +342,7 @@ def main():
 
     # Calculate RMSDs
     print("\n3. Calculating ligand RMSD values...")
-    rmsds = calculate_rmsds(dataset, ligand_info, args.temp_folder)
+    rmsds = calculate_rmsds(dataset, ligand_info, args.submission_folder)
     print(f"Calculated RMSD for {len(rmsds)} ligands")
 
     # Save results

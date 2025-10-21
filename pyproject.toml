@@ -34,7 +34,8 @@ dependencies = [
     "chembl_structure_pipeline==1.2.2",
     "dataclasses-json",
     "jupyterlab",
-    "matplotlib"
+    "matplotlib",
+    "xgboost"
 ]
 
 [project.scripts]
