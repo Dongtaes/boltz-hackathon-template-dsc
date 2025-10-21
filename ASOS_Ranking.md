@@ -1,5 +1,13 @@
 # Final Submission: Boltz Confidence-Based Ranking Model
 
+## Team Members
+- Janina Fritzke
+- Abdelhamid El Houari
+- Arda Nazim Atalay
+- Bahadir Acikbas
+- Adham Elaraby
+- Yuanfan Sun
+
 ## Problem Overview
 Each molecule target in the dataset has five predicted structures (`model_0`–`model_4`), each accompanied by a `confidence_*.json` file containing Boltz confidence metrics such as:
 
